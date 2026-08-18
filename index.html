@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AzeVex | Digital Store</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* SOFT & SMOOTH GLOBAL STYLES */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #fafafa;
+      color: #1a1a1a;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER WITH BLUR & SOFT SHADOW */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px;
+      transition: all 0.3s ease;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .brand-logo img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* LANGUAGE SWITCHER */
+    .lang-switcher {
+      display: flex;
+      background: #f0f0f0;
+      padding: 3px;
+      border-radius: 20px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 15px;
+      cursor: pointer;
+      color: #666;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .lang-btn.active {
+      background: #ffffff;
+      color: #000000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .settings-btn {
+      background: #f5f5f5;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+
+    .settings-btn:hover {
+      background: #e8e8e8;
+      transform: rotate(45deg);
+    }
+
+    /* HERO BANNER */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+    }
+
+    .hero-media {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+      filter: brightness(0.9);
+      transition: transform 0.8s ease;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #ffffff;
+      padding: 20px;
+      max-width: 600px;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+      background: #f0f0f0;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 24px;
+    }
+
+    /* DEAL OF THE DAY (GÜNÜN İNDİRİMLİ ÜRÜNÜ) */
+    .deal-section {
+      background: linear-gradient(135deg, #111111 0%, #222222 100%);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 35px;
+      margin-bottom: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .deal-section { grid-template-columns: 1fr; padding: 25px; }
+    }
+
+    .deal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ff3b30;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .deal-media {
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #333;
+    }
+
+    .deal-media img, .deal-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .deal-price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 15px 0 20px 0;
+    }
+
+    .deal-price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #34c759;
+    }
+
+    .deal-old-price {
+      font-size: 1.2rem;
+      text-decoration: line-through;
+      color: #888888;
+    }
+
+    .deal-discount-tag {
+      background: rgba(52, 199, 89, 0.15);
+      color: #34c759;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* PRODUCTS GRID */
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+      color: #111;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    }
+
+    .media-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      background: #f5f5f5;
+    }
+
+    .media-wrapper img,
+    .media-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 8px;
+    }
+
+    .details {
+      padding: 18px;
+    }
+
+    .product-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #111;
+    }
+
+    .price {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #555;
+    }
+
+    /* SMOOTH MODALS */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .info-modal-card, .product-detail-modal {
+      background: #ffffff;
+      width: 100%;
+      border-radius: 20px;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .info-modal-card,
+    .modal-overlay.active .product-detail-modal {
+      transform: scale(1);
+    }
+
+    .info-modal-card { max-width: 480px; }
+
+    .product-detail-modal {
+      max-width: 880px;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .product-detail-modal { grid-template-columns: 1fr; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 32px;
+      height: 32px;
+      background: #f0f0f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #666;
+      transition: background 0.2s;
+    }
+
+    .close-btn:hover { background: #e0e0e0; }
+
+    .info-item { margin-bottom: 18px; }
+    .info-item label { display: block; font-size: 0.75rem; font-weight: 800; color: #888; text-transform: uppercase; margin-bottom: 4px; }
+    .info-item p { font-size: 0.95rem; font-weight: 600; color: #111; }
+
+    .gallery-container { display: flex; flex-direction: column; gap: 12px; }
+    .main-view { width: 100%; aspect-ratio: 1/1; background: #f5f5f5; border-radius: 14px; overflow: hidden; }
+    .main-view img, .main-view video { width: 100%; height: 100%; object-fit: cover; }
+
+    .buy-etsy-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: #000000;
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      margin-top: 15px;
+    }
+
+    .buy-etsy-btn:hover {
+      background: #222222;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      border-top: 1px solid rgba(0,0,0,0.05);
+      padding: 35px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-logo">
+      <img src="bura yaz.png" alt="AzeVex Logo" onerror="this.style.display='none'">
+      <span>AzeVex</span>
+    </div>
+
+    <div class="header-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('en', this)">EN</button>
+        <button class="lang-btn" onclick="setLanguage('tr', this)">TR</button>
+        <button class="lang-btn" onclick="setLanguage('ru', this)">RU</button>
+      </div>
+
+      <button class="settings-btn" onclick="openSettingsModal()" title="Settings">
+        <i class="fa-solid fa-sliders"></i>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img class="hero-media" src="bura yaz.png" alt="AzeVex Banner">
+    <div class="hero-content">
+      <h1 class="hero-title" id="txt-hero-title">AzeVex Digital Assets</h1>
+      <a href="https://azevexart.etsy.com" target="_blank" class="hero-btn" id="txt-hero-btn">Visit Etsy Store</a>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <section class="deal-section">
+      <div>
+        <span class="deal-badge"><i class="fa-solid fa-fire"></i> <span id="txt-deal-badge">DEAL OF THE DAY</span></span>
+        <h2 id="txt-deal-title" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px;">BURA YAZ (Günün İndirimli Ürünü Adı)</h2>
+        <p id="txt-deal-desc" style="color: #aaa; font-size: 0.9rem; line-height: 1.5;">BURA YAZ (Xüsusi endirimdə olan bu məhsul haqqında qısa məlumat)</p>
+        
+        <div class="deal-price-box">
+          <span class="deal-price">$12.99</span>
+          <span class="deal-old-price">$25.00</span>
+          <span class="deal-discount-tag">50% OFF</span>
+        </div>
+
+        <a href="https://azevexart.etsy.com" target="_blank" class="buy-etsy-btn" style="background: #ffffff; color: #000;" id="txt-deal-btn">
+          Buy on Etsy <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+
+      <div class="deal-media">
+        <img src="bura yaz.png" alt="Deal of the day">
+      </div>
+    </section>
+
+    <h2 class="section-title" id="txt-products-title">Digital Products</h2>
+
+    <div class="grid">
+      
+      <div class="product-card" onclick="openProductModal('BURA YAZ (Product 1)', '$14.99', 'BURA YAZ (Description 1)', 'image', 'bura yaz.png')">
+        <div class="media-wrapper">
+          <span class="badge">DIGITAL</span>
+          <img src="bura yaz.png" alt="Product Image">
+        </div>
+        <div class="details">
+          <div class="product-name">BURA YAZ</div>
+          <div class="price">$14.99</div>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="openProductModal('BURA YAZ (Product 2)', '$19.99', 'BURA YAZ (Description 2)', 'video', 'bura yaz.mp4')">
+        <div class="media-wrapper">
+          <span class="badge">ANIMATION</span>
+          <video autoplay loop muted playsinline src="bura yaz.mp4"></video>
+        </div>
+        <div class="details">
+          <div class="product-name">BURA YAZ</div>
+          <div class="price">$19.99</div>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="openProductModal('BURA YAZ (Product 3)', '$9.99', 'BURA YAZ (Description 3)', 'image', 'bura yaz.png')">
+        <div class="media-wrapper">
+          <span class="badge">DIGITAL</span>
+          <img src="bura yaz.png" alt="Product Image">
+        </div>
+        <div class="details">
+          <div class="product-name">BURA YAZ</div>
+          <div class="price">$9.99</div>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="openProductModal('BURA YAZ (Product 4)', '$24.99', 'BURA YAZ (Description 4)', 'image', 'bura yaz.png')">
+        <div class="media-wrapper">
+          <span class="badge">DIGITAL</span>
+          <img src="bura yaz.png" alt="Product Image">
+        </div>
+        <div class="details">
+          <div class="product-name">BURA YAZ</div>
+          <div class="price">$24.99</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="settingsModal" onclick="closeModalOutside(event, 'settingsModal')">
+    <div class="info-modal-card">
+      <div class="close-btn" onclick="closeModal('settingsModal')"><i class="fa-solid fa-xmark"></i></div>
+      <div class="info-item" style="border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 20px;">
+        <h3 id="txt-modal-info-title" style="font-size: 1.1rem; font-weight: 800;">Store Information</h3>
+      </div>
+      
+      <div class="info-item">
+        <label id="lbl-about">About Store</label>
+        <p>BURA YAZ</p>
+      </div>
+
+      <div class="info-item">
+        <label id="lbl-name">Owner Name</label>
+        <p>BURA YAZ</p>
+      </div>
+
+      <div class="info-item">
+        <label id="lbl-phone">Phone Number</label>
+        <p>BURA YAZ</p>
+      </div>
+
+      <div class="info-item">
+        <label id="lbl-gmail">Gmail / Contact</label>
+        <p>BURA YAZ</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="productModal" onclick="closeModalOutside(event, 'productModal')">
+    <div class="product-detail-modal">
+      <div class="close-btn" onclick="closeModal('productModal')"><i class="fa-solid fa-xmark"></i></div>
+      
+      <div class="gallery-container">
+        <div class="main-view" id="modalMainMedia">
+          <img src="bura yaz.png" alt="Detail Image">
+        </div>
+      </div>
+
+      <div>
+        <span style="color:#28a745; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.5px;" id="txt-inst-download"><i class="fa-solid fa-bolt"></i> INSTANT DOWNLOAD / DIGITAL FILE</span>
+        <h2 id="pmTitle" style="font-size: 1.4rem; font-weight: 800; margin: 10px 0;">BURA YAZ</h2>
+        <div id="pmPrice" style="font-size: 1.2rem; font-weight: 800; margin-bottom: 15px;">$0.00</div>
+        <p id="pmDesc" style="color: #666; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">BURA YAZ</p>
+        
+        <a href="https://azevexart.etsy.com" target="_blank" class="buy-etsy-btn" id="txt-buy-btn">
+          Buy on Etsy <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 AzeVex Store. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        heroTitle: "AzeVex Digital Assets",
+        heroBtn: "Visit Etsy Store",
+        dealBadge: "DEAL OF THE DAY",
+        dealBtn: "Buy on Etsy",
+        productsTitle: "Digital Products",
+        infoTitle: "Store Information",
+        lblAbout: "About Store",
+        lblName: "Owner Name",
+        lblPhone: "Phone Number",
+        lblGmail: "Gmail / Contact",
+        instDownload: "INSTANT DOWNLOAD / DIGITAL FILE",
+        buyBtn: "Buy on Etsy"
+      },
+      tr: {
+        heroTitle: "AzeVex Dijital Ürünler",
+        heroBtn: "Etsy Mağazasını Ziyaret Et",
+        dealBadge: "GÜNÜN İNDİRİMLİ ÜRÜNÜ",
+        dealBtn: "Etsy'den Satın Al",
+        productsTitle: "Dijital Ürünler",
+        infoTitle: "Mağaza Bilgileri",
+        lblAbout: "Mağaza Hakkında",
+        lblName: "Ad Soyad",
+        lblPhone: "Telefon Numarası",
+        lblGmail: "E-posta / İletişim",
+        instDownload: "ANINDA İNDİRME / DİJİTAL DOSYA",
+        buyBtn: "Etsy'den Satın Al"
+      },
+      ru: {
+        heroTitle: "AzeVex Цифровые Товары",
+        heroBtn: "Посетить Магазин Etsy",
+        dealBadge: "ТОВАР ДНЯ СО СКИДКОЙ",
+        dealBtn: "Купить на Etsy",
+        productsTitle: "Цифровые Товары",
+        infoTitle: "Информация о Магазине",
+        lblAbout: "О Магазине",
+        lblName: "Имя Фамилия",
+        lblPhone: "Номер Телефона",
+        lblGmail: "Эл. почта / Контакты",
+        instDownload: "MГНОВЕННАЯ ЗАГРУЗКА / ЦИФРОВОЙ ФАЙЛ",
+        buyBtn: "Купить на Etsy"
+      }
+    };
+
+    function setLanguage(lang, btnElement) {
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      if(btnElement) btnElement.classList.add('active');
+
+      const t = translations[lang];
+      document.getElementById('txt-hero-title').innerText = t.heroTitle;
+      document.getElementById('txt-hero-btn').innerText = t.heroBtn;
+      document.getElementById('txt-deal-badge').innerText = t.dealBadge;
+      document.getElementById('txt-deal-btn').innerHTML = `${t.dealBtn} <i class="fa-solid fa-arrow-up-right-from-square"></i>`;
+      document.getElementById('txt-products-title').innerText = t.productsTitle;
+      document.getElementById('txt-modal-info-title').innerText = t.infoTitle;
+      document.getElementById('lbl-about').innerText = t.lblAbout;
+      document.getElementById('lbl-name').innerText = t.lblName;
+      document.getElementById('lbl-phone').innerText = t.lblPhone;
+      document.getElementById('lbl-gmail').innerText = t.lblGmail;
+      document.getElementById('txt-inst-download').innerHTML = `<i class="fa-solid fa-bolt"></i> ${t.instDownload}`;
+      document.getElementById('txt-buy-btn').innerHTML = `${t.buyBtn} <i class="fa-solid fa-arrow-up-right-from-square"></i>`;
+    }
+
+    /* Modal Controls */
+    function openSettingsModal() {
+      document.getElementById('settingsModal').classList.add('active');
+    }
+
+    function openProductModal(title, price, desc, mediaType, mediaSrc) {
+      document.getElementById('pmTitle').innerText = title;
+      document.getElementById('pmPrice').innerText = price;
+      document.getElementById('pmDesc').innerText = desc;
+      
+      const container = document.getElementById('modalMainMedia');
+      if(mediaType === 'video') {
+        container.innerHTML = `<video autoplay loop muted playsinline src="${mediaSrc}"></video>`;
+      } else {
+        container.innerHTML = `<img src="${mediaSrc}" alt="Product Detail">`;
+      }
+
+      document.getElementById('productModal').classList.add('active');
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+    }
+
+    function closeModalOutside(event, modalId) {
+      if (event.target.id === modalId) {
+        closeModal(modalId);
+      }
+    }
+  </script>
+</body>
+</html>
